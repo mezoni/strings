@@ -195,6 +195,25 @@ class Strings {
   }
 
   /**
+   * Returns the joined elements of the list if the list is not null; otherwise
+   * null.
+   *
+   * Example:
+   *     print(Strings.join(null));
+   *     => null
+   *
+   *     print(Strings.join([1, 2]));
+   *     => 12
+   */
+  static String join(List list, [String separator = ""]) {
+    if (list == null) {
+      return null;
+    }
+
+    return list.join(separator);
+  }
+
+  /**
    * Returns a string with reversed order of characters.
    *
    * Example:
@@ -217,8 +236,7 @@ class Strings {
    * Returns an unescaped printable string.
    *
    * Example:
-   *     var string = "Hello 'world' \n";
-   *     print(Strings.printable(string));
+   *     print(Strings.printable("Hello 'world' \n"));
    *     => Hello 'world' \n
    */
   static String printable(String string) {

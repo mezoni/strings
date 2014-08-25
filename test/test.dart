@@ -6,6 +6,7 @@ void main() {
   testCamelize();
   testCapitalize();
   testEscape();
+  testJoin();
   testPrintable();
   testReverse();
   testUnderscore();
@@ -81,6 +82,19 @@ void testEscape() {
   expect(actual, r"C:\\Windows", reason: subject);
   actual = Strings.escape(r"\u0001");
   expect(actual, r"\\u0001", reason: subject);
+}
+
+void testJoin() {
+  var subject = "join";
+  //
+  var actual = Strings.join(null);
+  expect(actual, null, reason: subject);
+  //
+  actual = Strings.join([1, 2]);
+  expect(actual, "12", reason: subject);
+  //
+  actual = Strings.join([1, 2], ", ");
+  expect(actual, "1, 2", reason: subject);
 }
 
 void testPrintable() {

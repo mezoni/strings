@@ -7,18 +7,13 @@ The 'strings' is a helper for the string transformations which can be useful in 
 
 Currently supports the following methods:
 
-```camelize```
-
-```capitalize```
-
-```escape```
-
-```printable```
-
-```reverse```
-
-```underscore```
-
-```unicode```
+- camelize
+- capitalize
+- escape
+- join
+- printable
+- reverse
+- underscore
+- unicode
 
 Other useful methods will be added soon...
