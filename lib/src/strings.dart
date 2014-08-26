@@ -195,6 +195,66 @@ class Strings {
   }
 
   /**
+   * Returns true if the string does not contain upper case letters; otherwise
+   * false;
+   */
+  // TODO: Upgrade to "unicode" version when it will be ready
+  static bool isLowerCase(String string) {
+    if (string == null) {
+      throw new ArgumentError("string: $string");
+    }
+
+    if (string.length == 0) {
+      return true;
+    }
+
+    var length = string.length;
+    for (var i = 0; i < length; i++) {
+      var c = string.codeUnitAt(i);
+      var flag = 0;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
+      }
+
+      if (c <= _ASCII_END && flag & _UPPER != 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Returns true if the string does not contain loer case letters; otherwise
+   * false;
+   */
+  // TODO: Upgrade to "unicode" version when it will be ready
+  static bool isUpperCase(String string) {
+    if (string == null) {
+      throw new ArgumentError("string: $string");
+    }
+
+    if (string.length == 0) {
+      return true;
+    }
+
+    var length = string.length;
+    for (var i = 0; i < length; i++) {
+      var c = string.codeUnitAt(i);
+      var flag = 0;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
+      }
+
+      if (c <= _ASCII_END && flag & _LOWER != 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * Returns the joined elements of the list if the list is not null; otherwise
    * null.
    *

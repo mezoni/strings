@@ -6,6 +6,7 @@ void main() {
   testCamelize();
   testCapitalize();
   testEscape();
+  testIsLowerCase();
   testJoin();
   testPrintable();
   testReverse();
@@ -82,6 +83,32 @@ void testEscape() {
   expect(actual, r"C:\\Windows", reason: subject);
   actual = Strings.escape(r"\u0001");
   expect(actual, r"\\u0001", reason: subject);
+}
+
+void testIsLowerCase() {
+  var subject = "isLowerCase";
+  //
+  var actual = Strings.isLowerCase("");
+  expect(actual, true, reason: subject);
+  //
+  actual = Strings.isLowerCase("lower_case1");
+  expect(actual, true, reason: subject);
+  //
+  actual = Strings.isLowerCase("UPPER_CASE2");
+  expect(actual, false, reason: subject);
+}
+
+void testIsUpperCase() {
+  var subject = "isUpperCase";
+  //
+  var actual = Strings.isUpperCase("");
+  expect(actual, true, reason: subject);
+  //
+  actual = Strings.isUpperCase("lower_case1");
+  expect(actual, false, reason: subject);
+  //
+  actual = Strings.isUpperCase("UPPER_CASE2");
+  expect(actual, true, reason: subject);
 }
 
 void testJoin() {
