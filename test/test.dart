@@ -86,6 +86,11 @@ void testEscape() {
   expect(actual, r"C:\\Windows", reason: subject);
   actual = escape(r"\u0001");
   expect(actual, r"\\u0001", reason: subject);
+  // invalid characters
+  actual = escape(new String.fromCharCode(0xb5e));
+  expect(actual, r"\u0b5e", reason: subject);
+  actual = escape(new String.fromCharCode(0x10ffff));
+  expect(actual, r"\u10ffff", reason: subject);
 }
 
 void testIsLowerCase() {
@@ -227,6 +232,11 @@ void testToPrintable() {
   expect(actual, r"C:\Windows", reason: subject);
   actual = toPrintable(r"\u0001");
   expect(actual, r"\u0001", reason: subject);
+  // invalid characters
+  actual = escape(new String.fromCharCode(0xb5e));
+  expect(actual, r"\u0b5e", reason: subject);
+  actual = escape(new String.fromCharCode(0x10ffff));
+  expect(actual, r"\u10ffff", reason: subject);
 }
 
 void testToUnicode() {
