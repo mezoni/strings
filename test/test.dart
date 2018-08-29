@@ -1,20 +1,22 @@
 import "package:strings/strings.dart";
-import "package:unittest/unittest.dart";
+import "package:test/test.dart" hide escape;
 
 void main() {
-  _prepare();
-  testCamelize();
-  testCapitalize();
-  testEscape();
-  testIsLowerCase();
-  testIsUpperCase();
-  testJoin();
-  testReverse();
-  testStartsWithLowerCase();
-  testStartsWithUpperCase();
-  testToPrintable();
-  testUnderscore();
-  testToUnicode();
+  test("Strings", () {
+    _prepare();
+    testCamelize();
+    testCapitalize();
+    testEscape();
+    testIsLowerCase();
+    testIsUpperCase();
+    testJoin();
+    testReverse();
+    testStartsWithLowerCase();
+    testStartsWithUpperCase();
+    testToPrintable();
+    testUnderscore();
+    testToUnicode();
+  });
 }
 
 void testCamelize() {
@@ -268,11 +270,11 @@ void _prepare() {
   _underscoreCamelize.add(["DartVm DartCore", "dart_vm dart_core"]);
   _underscoreCamelizeLower.add(["dartVm dartCore", "dart_vm dart_core"]);
   _underscoreCamelize.add([" Dart VM DartCore X", " dart v_m dart_core x"]);
-  _underscoreCamelizeLower.add([" dart vM dartCore x", " dart v_m dart_core x"]
-      );
+  _underscoreCamelizeLower
+      .add([" dart vM dartCore x", " dart v_m dart_core x"]);
   _underscoreCamelize.add([" Dart VM Dart1Core X", " dart v_m dart1_core x"]);
-  _underscoreCamelizeLower.add([" dart vM dart1Core x",
-      " dart v_m dart1_core x"]);
+  _underscoreCamelizeLower
+      .add([" dart vM dart1Core x", " dart v_m dart1_core x"]);
   _underscoreCamelize.add([" Dart_Core ", " dart__core "]);
   _underscoreCamelizeLower.add([" dart_Core ", " dart__core "]);
   _underscoreCamelize.add([" DartVM ", " dart_v_m "]);
