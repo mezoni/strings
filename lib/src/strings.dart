@@ -22,14 +22,136 @@ const int _ALPHA = _LOWER | _UPPER;
 
 const int _ALPHA_NUM = _ALPHA | _DIGIT;
 
-const int _VALID = _ALPHA_NUM | _UNDERSCORE;
-
-final List<int> _ascii = <int>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-    8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 4, 0, 2, 2, 2, 2,
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
-    0];
+final List<int> _ascii = <int>[
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  0,
+  0,
+  0,
+  0,
+  4,
+  0,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  0,
+  0,
+  0,
+  0,
+  0
+];
 
 /**
  * Returns a string in the form "UpperCamelCase" or "lowerCamelCase".
@@ -153,7 +275,6 @@ String escape(String string, [String encode(int charCode)]) {
         default:
           sb.write(encode(c));
       }
-
     } else if (c >= _ASCII_START && c <= _ASCII_END) {
       switch (c) {
         case 34:
@@ -171,9 +292,8 @@ String escape(String string, [String encode(int charCode)]) {
         default:
           sb.write(string[i]);
       }
-
     } else if (_isPrintable(c)) {
-     sb.write(string[i]);
+      sb.write(string[i]);
     } else {
       sb.write(encode(c));
     }
@@ -427,7 +547,6 @@ String toPrintable(String string) {
         default:
           sb.write(toUnicode(c));
       }
-
     } else if (_isPrintable(c)) {
       sb.write(string[i]);
     } else {
@@ -506,16 +625,6 @@ String underscore(String string) {
   }
 
   return sb.toString().toLowerCase();
-}
-
-SparseBoolList _generateBool(List<int> ranges) {
-  var list = new SparseBoolList();
-  var length = ranges.length;
-  for (var i = 0; i < length; i += 2) {
-    list.addGroup(new GroupedRangeList<bool>(ranges[i], ranges[i + 1], true));
-  }
-
-  return list;
 }
 
 // TODO: Optimize via table
