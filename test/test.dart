@@ -54,7 +54,7 @@ void testCapitalize() {
 void testEscape() {
   var subject = "escape";
   //
-  var actual = escape(new String.fromCharCode(0));
+  var actual = escape(String.fromCharCode(0));
   expect(actual, r"\u0000", reason: subject);
   actual = escape("\t");
   expect(actual, r"\t", reason: subject);
@@ -70,28 +70,28 @@ void testEscape() {
   expect(actual, r"\'", reason: subject);
   actual = escape("\\");
   expect(actual, r"\\", reason: subject);
-  actual = escape(new String.fromCharCode(31));
+  actual = escape(String.fromCharCode(31));
   expect(actual, r"\u001f", reason: subject);
   actual = escape("hello");
   expect(actual, r"hello", reason: subject);
   actual = escape("Привет");
   expect(actual, r"Привет", reason: subject);
-  actual = escape(new String.fromCharCode(0x80));
+  actual = escape(String.fromCharCode(0x80));
   expect(actual, r"\u0080", reason: subject);
-  actual = escape(new String.fromCharCode(0x9f));
+  actual = escape(String.fromCharCode(0x9f));
   expect(actual, r"\u009f", reason: subject);
-  actual = escape(new String.fromCharCode(0xa0));
-  expect(actual, new String.fromCharCode(0xa0), reason: subject);
-  actual = escape(new String.fromCharCode(0xa1));
+  actual = escape(String.fromCharCode(0xa0));
+  expect(actual, String.fromCharCode(0xa0), reason: subject);
+  actual = escape(String.fromCharCode(0xa1));
   expect(actual, r"¡", reason: subject);
   actual = escape(r"C:\Windows");
   expect(actual, r"C:\\Windows", reason: subject);
   actual = escape(r"\u0001");
   expect(actual, r"\\u0001", reason: subject);
   // invalid characters
-  actual = escape(new String.fromCharCode(0xb5e));
+  actual = escape(String.fromCharCode(0xb5e));
   expect(actual, r"\u0b5e", reason: subject);
-  actual = escape(new String.fromCharCode(0x10ffff));
+  actual = escape(String.fromCharCode(0x10ffff));
   expect(actual, r"\u10ffff", reason: subject);
 }
 
@@ -200,7 +200,7 @@ void testStartsWithUpperCase() {
 void testToPrintable() {
   var subject = "toPrintable";
   //
-  var actual = toPrintable(new String.fromCharCode(0));
+  var actual = toPrintable(String.fromCharCode(0));
   expect(actual, r"\u0000", reason: subject);
   actual = toPrintable("\t");
   expect(actual, r"\t", reason: subject);
@@ -216,28 +216,28 @@ void testToPrintable() {
   expect(actual, r"'", reason: subject);
   actual = toPrintable("\\");
   expect(actual, r"\", reason: subject);
-  actual = toPrintable(new String.fromCharCode(31));
+  actual = toPrintable(String.fromCharCode(31));
   expect(actual, r"\u001f", reason: subject);
   actual = toPrintable("hello");
   expect(actual, r"hello", reason: subject);
   actual = toPrintable("Привет");
   expect(actual, r"Привет", reason: subject);
-  actual = toPrintable(new String.fromCharCode(0x80));
+  actual = toPrintable(String.fromCharCode(0x80));
   expect(actual, r"\u0080", reason: subject);
-  actual = toPrintable(new String.fromCharCode(0x9f));
+  actual = toPrintable(String.fromCharCode(0x9f));
   expect(actual, r"\u009f", reason: subject);
-  actual = toPrintable(new String.fromCharCode(0xa0));
-  expect(actual, new String.fromCharCode(0xa0), reason: subject);
-  actual = toPrintable(new String.fromCharCode(0xa1));
+  actual = toPrintable(String.fromCharCode(0xa0));
+  expect(actual, String.fromCharCode(0xa0), reason: subject);
+  actual = toPrintable(String.fromCharCode(0xa1));
   expect(actual, r"¡", reason: subject);
   actual = toPrintable(r"C:\Windows");
   expect(actual, r"C:\Windows", reason: subject);
   actual = toPrintable(r"\u0001");
   expect(actual, r"\u0001", reason: subject);
   // invalid characters
-  actual = escape(new String.fromCharCode(0xb5e));
+  actual = escape(String.fromCharCode(0xb5e));
   expect(actual, r"\u0b5e", reason: subject);
-  actual = escape(new String.fromCharCode(0x10ffff));
+  actual = escape(String.fromCharCode(0x10ffff));
   expect(actual, r"\u10ffff", reason: subject);
 }
 

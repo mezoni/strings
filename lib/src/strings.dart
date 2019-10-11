@@ -153,19 +153,17 @@ final List<int> _ascii = <int>[
   0
 ];
 
-/**
- * Returns a string in the form "UpperCamelCase" or "lowerCamelCase".
- *
- * Example:
- *      print(camelize("dart_vm"));
- *      => DartVm
- */
+/// Returns a string in the form "UpperCamelCase" or "lowerCamelCase".
+///
+/// Example:
+///      print(camelize("dart_vm"));
+///      => DartVm
 String camelize(String string, [bool lower = false]) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return string;
   }
 
@@ -174,7 +172,7 @@ String camelize(String string, [bool lower = false]) {
   var length = string.length;
   var position = 0;
   var remove = false;
-  var sb = new StringBuffer();
+  var sb = StringBuffer();
   for (var i = 0; i < length; i++) {
     var s = string[i];
     var c = s.codeUnitAt(0);
@@ -219,38 +217,34 @@ String camelize(String string, [bool lower = false]) {
   return sb.toString();
 }
 
-/**
- * Returns a string with capitalized first character.
- *
- * Example:
- *     print(capitalize("dart"));
- *     => Dart
- */
+/// Returns a string with capitalized first character.
+///
+/// Example:
+///     print(capitalize("dart"));
+///     => Dart
 String capitalize(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return string;
   }
 
   return string[0].toUpperCase() + string.substring(1);
 }
 
-/**
- * Returns an escaped string.
- *
- * Example:
- *     print(escape("Hello 'world' \n"));
- *     => Hello \'world\' \n
- */
+/// Returns an escaped string.
+///
+/// Example:
+///     print(escape("Hello 'world' \n"));
+///     => Hello \'world\' \n
 String escape(String string, [String encode(int charCode)]) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return string;
   }
 
@@ -258,7 +252,7 @@ String escape(String string, [String encode(int charCode)]) {
     encode = toUnicode;
   }
 
-  var sb = new StringBuffer();
+  var sb = StringBuffer();
   var i = 0;
   for (var c in string.runes) {
     if (c >= _C0_START && c <= _C0_END) {
@@ -304,26 +298,24 @@ String escape(String string, [String encode(int charCode)]) {
   return sb.toString();
 }
 
-/**
- * Returns true if the string does not contain upper case letters; otherwise
- * false;
- *
- * Example:
- *     print(isLowerCase("camelCase"));
- *     => false
- *
- *     print(isLowerCase("dart"));
- *     => true
- *
- *     print(isLowerCase(""));
- *     => false
- */
+/// Returns true if the string does not contain upper case letters; otherwise
+/// false;
+///
+/// Example:
+///     print(isLowerCase("camelCase"));
+///     => false
+///
+///     print(isLowerCase("dart"));
+///     => true
+///
+///     print(isLowerCase(""));
+///     => false
 bool isLowerCase(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return true;
   }
 
@@ -350,26 +342,24 @@ bool isLowerCase(String string) {
   return true;
 }
 
-/**
- * Returns true if the string does not contain lower case letters; otherwise
- * false;
- *
- * Example:
- *     print(isUpperCase("CamelCase"));
- *     => false
- *
- *     print(isUpperCase("DART"));
- *     => true
- *
- *     print(isUpperCase(""));
- *     => false
- */
+/// Returns true if the string does not contain lower case letters; otherwise
+/// false;
+///
+/// Example:
+///     print(isUpperCase("CamelCase"));
+///     => false
+///
+///     print(isUpperCase("DART"));
+///     => true
+///
+///     print(isUpperCase(""));
+///     => false
 bool isUpperCase(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return true;
   }
 
@@ -396,17 +386,15 @@ bool isUpperCase(String string) {
   return true;
 }
 
-/**
- * Returns the joined elements of the list if the list is not null; otherwise
- * null.
- *
- * Example:
- *     print(join(null));
- *     => null
- *
- *     print(join([1, 2]));
- *     => 12
- */
+/// Returns the joined elements of the list if the list is not null; otherwise
+/// null.
+///
+/// Example:
+///     print(join(null));
+///     => null
+///
+///     print(join([1, 2]));
+///     => 12
 String join(List list, [String separator = ""]) {
   if (list == null) {
     return null;
@@ -415,42 +403,38 @@ String join(List list, [String separator = ""]) {
   return list.join(separator);
 }
 
-/**
- * Returns a string with reversed order of characters.
- *
- * Example:
- *     print(reverse("hello"));
- *     => olleh
- */
+/// Returns a string with reversed order of characters.
+///
+/// Example:
+///     print(reverse("hello"));
+///     => olleh
 String reverse(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
   if (string.length < 2) {
     return string;
   }
 
-  return new String.fromCharCodes(string.codeUnits.reversed);
+  return String.fromCharCodes(string.codeUnits.reversed);
 }
 
-/**
- * Returns true if the string starts with the lower case character; otherwise
- * false;
- *
- * Example:
- *     print(startsWithLowerCase("camelCase"));
- *     => true
- *
- *     print(startsWithLowerCase(""));
- *     => false
- */
+/// Returns true if the string starts with the lower case character; otherwise
+/// false;
+///
+/// Example:
+///     print(startsWithLowerCase("camelCase"));
+///     => true
+///
+///     print(startsWithLowerCase(""));
+///     => false
 bool startsWithLowerCase(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return false;
   }
 
@@ -474,23 +458,21 @@ bool startsWithLowerCase(String string) {
   return false;
 }
 
-/**
- * Returns true if the string starts with the upper case character; otherwise
- * false;
- *
- * Example:
- *     print(startsWithUpperCase("Dart"));
- *     => true
- *
- *     print(startsWithUpperCase(""));
- *     => false
- */
+/// Returns true if the string starts with the upper case character; otherwise
+/// false;
+///
+/// Example:
+///     print(startsWithUpperCase("Dart"));
+///     => true
+///
+///     print(startsWithUpperCase(""));
+///     => false
 bool startsWithUpperCase(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return false;
   }
 
@@ -514,23 +496,21 @@ bool startsWithUpperCase(String string) {
   return false;
 }
 
-/**
- * Returns an unescaped printable string.
- *
- * Example:
- *     print(toPrintable("Hello 'world' \n"));
- *     => Hello 'world' \n
- */
+/// Returns an unescaped printable string.
+///
+/// Example:
+///     print(toPrintable("Hello 'world' \n"));
+///     => Hello 'world' \n
 String toPrintable(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return string;
   }
 
-  var sb = new StringBuffer();
+  var sb = StringBuffer();
   var i = 0;
   for (var c in string.runes) {
     if (c >= _C0_START && c <= _C0_END) {
@@ -559,16 +539,14 @@ String toPrintable(String string) {
   return sb.toString();
 }
 
-/**
- * Returns an Unicode representation of the character code.
- *
- * Example:
- *     print(toUnicode(48));
- *     => \u0030
- */
+/// Returns an Unicode representation of the character code.
+///
+/// Example:
+///     print(toUnicode(48));
+///     => \u0030
 String toUnicode(int charCode) {
   if (charCode == null || charCode < 0 || charCode > _UNICODE_END) {
-    throw new ArgumentError('charCode: $charCode');
+    throw ArgumentError('charCode: $charCode');
   }
 
   var hex = charCode.toRadixString(16);
@@ -580,24 +558,22 @@ String toUnicode(int charCode) {
   return '\\u$hex';
 }
 
-/**
- * Returns an underscored string.
- *
- * Example:
- *     print(underscore("DartVM DartCore"));
- *     => dart_vm dart_core
- */
+/// Returns an underscored string.
+///
+/// Example:
+///     print(underscore("DartVM DartCore"));
+///     => dart_vm dart_core
 String underscore(String string) {
   if (string == null) {
-    throw new ArgumentError("string: $string");
+    throw ArgumentError("string: $string");
   }
 
-  if (string.length == 0) {
+  if (string.isEmpty) {
     return string;
   }
 
   var length = string.length;
-  var sb = new StringBuffer();
+  var sb = StringBuffer();
   var separate = false;
   for (var i = 0; i < length; i++) {
     var s = string[i];
