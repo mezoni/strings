@@ -1,5 +1,6 @@
 library strings;
 
-import "package:unicode/unicode.dart" as unicode;
+import 'package:characters/characters.dart';
+import 'package:unicode/unicode.dart' as unicode;
 
-part "src/strings.dart";
+part 'src/strings.dart';

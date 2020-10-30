@@ -160,7 +160,7 @@ final List<int> _ascii = <int>[
 ///      => DartVm
 String camelize(String string, [bool lower = false]) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -224,7 +224,7 @@ String camelize(String string, [bool lower = false]) {
 ///     => Dart
 String capitalize(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -239,60 +239,62 @@ String capitalize(String string) {
 /// Example:
 ///     print(escape("Hello 'world' \n"));
 ///     => Hello \'world\' \n
-String escape(String string, [String encode(int charCode)]) {
+String escape(String string, [String Function(int charCode) encode]) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
     return string;
   }
 
-  if (encode == null) {
-    encode = toUnicode;
-  }
-
-  var sb = StringBuffer();
-  var i = 0;
-  for (var c in string.runes) {
-    if (c >= _C0_START && c <= _C0_END) {
-      switch (c) {
-        case 9:
-          sb.write("\\t");
-          break;
-        case 10:
-          sb.write("\\n");
-          break;
-        case 13:
-          sb.write("\\r");
-          break;
-        default:
-          sb.write(encode(c));
+  encode ??= toUnicode;
+  final sb = StringBuffer();
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
+    if (runes.length == 1) {
+      final c = runes.first;
+      if (c >= _C0_START && c <= _C0_END) {
+        switch (c) {
+          case 9:
+            sb.write('\\t');
+            break;
+          case 10:
+            sb.write('\\n');
+            break;
+          case 13:
+            sb.write('\\r');
+            break;
+          default:
+            sb.write(encode(c));
+        }
+      } else if (c >= _ASCII_START && c <= _ASCII_END) {
+        switch (c) {
+          case 34:
+            sb.write('\\\"');
+            break;
+          case 36:
+            sb.write('\\\$');
+            break;
+          case 39:
+            sb.write("\\\'");
+            break;
+          case 92:
+            sb.write('\\\\');
+            break;
+          default:
+            sb.write(s);
+        }
+      } else if (_isPrintable(c)) {
+        sb.write(s);
+      } else {
+        sb.write(encode(c));
       }
-    } else if (c >= _ASCII_START && c <= _ASCII_END) {
-      switch (c) {
-        case 34:
-          sb.write("\\\"");
-          break;
-        case 36:
-          sb.write("\\\$");
-          break;
-        case 39:
-          sb.write("\\\'");
-          break;
-        case 92:
-          sb.write("\\\\");
-          break;
-        default:
-          sb.write(string[i]);
-      }
-    } else if (_isPrintable(c)) {
-      sb.write(string[i]);
     } else {
-      sb.write(encode(c));
+      // Experimental: Assuming that all clusters does not need to be escaped
+      sb.write(s);
     }
-
-    i++;
   }
 
   return sb.toString();
@@ -312,7 +314,7 @@ String escape(String string, [String encode(int charCode)]) {
 ///     => false
 bool isLowerCase(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -356,7 +358,7 @@ bool isLowerCase(String string) {
 ///     => false
 bool isUpperCase(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -395,7 +397,7 @@ bool isUpperCase(String string) {
 ///
 ///     print(join([1, 2]));
 ///     => 12
-String join(List list, [String separator = ""]) {
+String join(List list, [String separator = '']) {
   if (list == null) {
     return null;
   }
@@ -410,7 +412,7 @@ String join(List list, [String separator = ""]) {
 ///     => olleh
 String reverse(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.length < 2) {
@@ -431,7 +433,7 @@ String reverse(String string) {
 ///     => false
 bool startsWithLowerCase(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -469,7 +471,7 @@ bool startsWithLowerCase(String string) {
 ///     => false
 bool startsWithUpperCase(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -503,37 +505,42 @@ bool startsWithUpperCase(String string) {
 ///     => Hello 'world' \n
 String toPrintable(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
     return string;
   }
 
-  var sb = StringBuffer();
-  var i = 0;
-  for (var c in string.runes) {
-    if (c >= _C0_START && c <= _C0_END) {
-      switch (c) {
-        case 9:
-          sb.write("\\t");
-          break;
-        case 10:
-          sb.write("\\n");
-          break;
-        case 13:
-          sb.write("\\r");
-          break;
-        default:
-          sb.write(toUnicode(c));
+  final sb = StringBuffer();
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
+    if (runes.length == 1) {
+      final c = runes.first;
+      if (c >= _C0_START && c <= _C0_END) {
+        switch (c) {
+          case 9:
+            sb.write('\\t');
+            break;
+          case 10:
+            sb.write('\\n');
+            break;
+          case 13:
+            sb.write('\\r');
+            break;
+          default:
+            sb.write(toUnicode(c));
+        }
+      } else if (_isPrintable(c)) {
+        sb.write(s);
+      } else {
+        sb.write(toUnicode(c));
       }
-    } else if (_isPrintable(c)) {
-      sb.write(string[i]);
     } else {
-      sb.write(toUnicode(c));
+      // Experimental: Assuming that all clusters can be printed
+      sb.write(s);
     }
-
-    i++;
   }
 
   return sb.toString();
@@ -545,14 +552,18 @@ String toPrintable(String string) {
 ///     print(toUnicode(48));
 ///     => \u0030
 String toUnicode(int charCode) {
-  if (charCode == null || charCode < 0 || charCode > _UNICODE_END) {
-    throw ArgumentError('charCode: $charCode');
+  if (charCode == null) {
+    throw ArgumentError.notNull('charCode');
+  }
+
+  if (charCode < 0 || charCode > _UNICODE_END) {
+    throw RangeError.range(charCode, 0, _UNICODE_END, 'charCode');
   }
 
   var hex = charCode.toRadixString(16);
   var length = hex.length;
   if (length < 4) {
-    hex = hex.padLeft(4, "0");
+    hex = hex.padLeft(4, '0');
   }
 
   return '\\u$hex';
@@ -565,7 +576,7 @@ String toUnicode(int charCode) {
 ///     => dart_vm dart_core
 String underscore(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError.notNull('string');
   }
 
   if (string.isEmpty) {
@@ -584,7 +595,7 @@ String underscore(String string) {
     }
 
     if (separate && flag & _UPPER != 0) {
-      sb.write("_");
+      sb.write('_');
       sb.write(s);
       separate = true;
     } else {
