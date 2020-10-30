@@ -169,16 +169,18 @@ String camelize(String string, [bool lower = false]) {
 
   string = string.toLowerCase();
   var capitlize = true;
-  var length = string.length;
   var position = 0;
   var remove = false;
   var sb = StringBuffer();
-  for (var i = 0; i < length; i++) {
-    var s = string[i];
-    var c = s.codeUnitAt(0);
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
     var flag = 0;
-    if (c <= _ASCII_END) {
-      flag = _ascii[c];
+    if (runes.length == 1) {
+      var c = runes.first;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
+      }
     }
 
     if (capitlize && flag & _ALPHA != 0) {
@@ -321,22 +323,24 @@ bool isLowerCase(String string) {
     return true;
   }
 
-  var length = string.length;
-  for (var i = 0; i < length; i++) {
-    var c = string.codeUnitAt(i);
-    var flag = 0;
-    if (c <= _ASCII_END) {
-      flag = _ascii[c];
-    }
-
-    if (c <= _ASCII_END) {
-      if (flag & _UPPER != 0) {
-        return false;
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
+    if (runes.length == 1) {
+      var c = runes.first;
+      var flag = 0;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
       }
-    } else {
-      var s = string[i];
-      if (s == s.toUpperCase()) {
-        return false;
+
+      if (c <= _ASCII_END) {
+        if (flag & _UPPER != 0) {
+          return false;
+        }
+      } else {
+        if (s == s.toUpperCase()) {
+          return false;
+        }
       }
     }
   }
@@ -365,22 +369,24 @@ bool isUpperCase(String string) {
     return true;
   }
 
-  var length = string.length;
-  for (var i = 0; i < length; i++) {
-    var c = string.codeUnitAt(i);
-    var flag = 0;
-    if (c <= _ASCII_END) {
-      flag = _ascii[c];
-    }
-
-    if (c <= _ASCII_END) {
-      if (flag & _LOWER != 0) {
-        return false;
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
+    if (runes.length == 1) {
+      var c = runes.first;
+      var flag = 0;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
       }
-    } else {
-      var s = string[i];
-      if (s == s.toLowerCase()) {
-        return false;
+
+      if (c <= _ASCII_END) {
+        if (flag & _LOWER != 0) {
+          return false;
+        }
+      } else {
+        if (s == s.toLowerCase()) {
+          return false;
+        }
       }
     }
   }
@@ -419,7 +425,8 @@ String reverse(String string) {
     return string;
   }
 
-  return String.fromCharCodes(string.codeUnits.reversed);
+  final characters = Characters(string);
+  return characters.toList().reversed.join();
 }
 
 /// Returns true if the string starts with the lower case character; otherwise
@@ -440,20 +447,24 @@ bool startsWithLowerCase(String string) {
     return false;
   }
 
-  var c = string.codeUnitAt(0);
-  var flag = 0;
-  if (c <= _ASCII_END) {
-    flag = _ascii[c];
-  }
-
-  if (c <= _ASCII_END) {
-    if (flag & _LOWER != 0) {
-      return true;
+  final characters = Characters(string);
+  final s = characters.first;
+  final runes = s.runes;
+  if (runes.length == 1) {
+    var c = runes.first;
+    var flag = 0;
+    if (c <= _ASCII_END) {
+      flag = _ascii[c];
     }
-  } else {
-    var s = string[0];
-    if (s == s.toLowerCase()) {
-      return true;
+
+    if (c <= _ASCII_END) {
+      if (flag & _LOWER != 0) {
+        return true;
+      }
+    } else {
+      if (s == s.toLowerCase()) {
+        return true;
+      }
     }
   }
 
@@ -478,20 +489,24 @@ bool startsWithUpperCase(String string) {
     return false;
   }
 
-  var c = string.codeUnitAt(0);
-  var flag = 0;
-  if (c <= _ASCII_END) {
-    flag = _ascii[c];
-  }
-
-  if (c <= _ASCII_END) {
-    if (flag & _UPPER != 0) {
-      return true;
+  final characters = Characters(string);
+  final s = characters.first;
+  final runes = s.runes;
+  if (runes.length == 1) {
+    var c = runes.first;
+    var flag = 0;
+    if (c <= _ASCII_END) {
+      flag = _ascii[c];
     }
-  } else {
-    var s = string[0];
-    if (s == s.toUpperCase()) {
-      return true;
+
+    if (c <= _ASCII_END) {
+      if (flag & _UPPER != 0) {
+        return true;
+      }
+    } else {
+      if (s == s.toUpperCase()) {
+        return true;
+      }
     }
   }
 
@@ -583,20 +598,22 @@ String underscore(String string) {
     return string;
   }
 
-  var length = string.length;
   var sb = StringBuffer();
   var separate = false;
-  for (var i = 0; i < length; i++) {
-    var s = string[i];
-    var c = s.codeUnitAt(0);
+  final characters = Characters(string);
+  for (final s in characters) {
+    final runes = s.runes;
     var flag = 0;
-    if (c <= _ASCII_END) {
-      flag = _ascii[c];
+    if (runes.length == 1) {
+      var c = runes.first;
+      if (c <= _ASCII_END) {
+        flag = _ascii[c];
+      }
     }
 
     if (separate && flag & _UPPER != 0) {
       sb.write('_');
-      sb.write(s);
+      sb.write(s.toLowerCase());
       separate = true;
     } else {
       if (flag & _ALPHA_NUM != 0) {
@@ -607,11 +624,11 @@ String underscore(String string) {
         separate = false;
       }
 
-      sb.write(s);
+      sb.write(s.toLowerCase());
     }
   }
 
-  return sb.toString().toLowerCase();
+  return sb.toString();
 }
 
 // TODO: Optimize via table

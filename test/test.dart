@@ -19,18 +19,21 @@ void main() {
   });
 }
 
+List<List<String>> _underscoreCamelize = <List<String>>[];
+
+List<List<String>> _underscoreCamelizeLower = <List<String>>[];
+
 void testCamelize() {
   var subject = 'camelize';
   //
-  var length = _underscoreCamelize.length;
-  for (var i = 0; i < length; i += 2) {
+  for (var i = 0; i < _underscoreCamelize.length; i += 2) {
     var source = _underscoreCamelize[i + 0][1];
     var expected = _underscoreCamelize[i + 0][0];
     var actual = camelize(source);
     expect(actual, expected, reason: subject);
   }
   //
-  for (var i = 0; i < length; i += 2) {
+  for (var i = 0; i < _underscoreCamelizeLower.length; i += 2) {
     var source = _underscoreCamelizeLower[i + 0][1];
     var expected = _underscoreCamelizeLower[i + 0][0];
     var actual = camelize(source, true);
@@ -115,6 +118,9 @@ void testIsLowerCase() {
   //
   actual = isLowerCase('пока');
   expect(actual, true, reason: subject);
+  //
+  actual = isLowerCase('0️⃣');
+  expect(actual, true, reason: subject);
 }
 
 void testIsUpperCase() {
@@ -133,6 +139,9 @@ void testIsUpperCase() {
   expect(actual, false, reason: subject);
   //
   actual = isUpperCase('ПОКА');
+  expect(actual, true, reason: subject);
+  //
+  actual = isUpperCase('0️⃣');
   expect(actual, true, reason: subject);
 }
 
@@ -154,6 +163,9 @@ void testReverse() {
   //
   var actual = reverse('hello');
   expect(actual, 'olleh', reason: subject);
+  //
+  actual = reverse('00️⃣1');
+  expect(actual, '10️⃣0', reason: subject);
 }
 
 void testStartsWithLowerCase() {
@@ -176,6 +188,9 @@ void testStartsWithLowerCase() {
   //
   actual = startsWithLowerCase('1');
   expect(actual, false, reason: subject);
+  //
+  actual = startsWithLowerCase('0️⃣');
+  expect(actual, false, reason: subject);
 }
 
 void testStartsWithUpperCase() {
@@ -197,6 +212,9 @@ void testStartsWithUpperCase() {
   expect(actual, false, reason: subject);
   //
   actual = startsWithUpperCase('1');
+  expect(actual, false, reason: subject);
+  //
+  actual = startsWithUpperCase('0️⃣');
   expect(actual, false, reason: subject);
 }
 
@@ -260,17 +278,13 @@ void testToUnicode() {
 void testUnderscore() {
   var subject = 'underscore';
   //
-  var length = _underscoreCamelize.length;
-  for (var i = 0; i < length; i += 2) {
+  for (var i = 0; i < _underscoreCamelize.length; i += 2) {
     var source = _underscoreCamelize[i + 0][0];
     var expected = _underscoreCamelize[i + 0][1];
     var actual = underscore(source);
     expect(actual, expected, reason: subject);
   }
 }
-
-List<List<String>> _underscoreCamelize = <List<String>>[];
-List<List<String>> _underscoreCamelizeLower = <List<String>>[];
 
 void _prepare() {
   _underscoreCamelize.add(['DartVm DartCore', 'dart_vm dart_core']);
@@ -289,4 +303,5 @@ void _prepare() {
   _underscoreCamelizeLower.add([' _dartVM ', ' _dart_v_m ']);
   _underscoreCamelize.add(['_DartVM ', '_dart_v_m ']);
   _underscoreCamelizeLower.add(['_dartVM ', '_dart_v_m ']);
+  _underscoreCamelize.add(['A0️⃣Bc', 'a0️⃣_bc']);
 }

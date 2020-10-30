@@ -1,5 +1,5 @@
 name: strings
-version: 0.1.3
+version: 0.1.4
 author: Andrew Mezoni <andrew.mezoni@gmail.com>
 description: The 'strings' is a helper for the string transformation which can be useful in the code generators (such as 'camelize', 'escape', 'underscore' etc).
 homepage: https://github.com/mezoni/strings.git
