@@ -241,7 +241,7 @@ String capitalize(String string) {
 /// Example:
 ///     print(escape("Hello 'world' \n"));
 ///     => Hello \'world\' \n
-String escape(String string, [String Function(int charCode) encode]) {
+String escape(String string, [String Function(int charCode)? encode]) {
   if (string == null) {
     throw ArgumentError.notNull('string');
   }
@@ -404,9 +404,9 @@ bool isUpperCase(String string) {
 ///     print(join([1, 2]));
 ///     => 12
 String join(List list, [String separator = '']) {
-  if (list == null) {
-    return null;
-  }
+  // if (list == null) {
+  //   return null;
+  // }
 
   return list.join(separator);
 }
