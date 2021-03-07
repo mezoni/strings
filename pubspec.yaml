@@ -4,13 +4,9 @@ author: Andrew Mezoni <andrew.mezoni@gmail.com>
 description: The 'strings' is a helper for the string transformation which can be useful in the code generators (such as 'camelize', 'escape', 'underscore' etc).
 homepage: https://github.com/mezoni/strings.git
 environment:
-  sdk: '>=2.12.0-200 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
   characters: ^1.1.0
-  # unicode: ^0.2.4
-  unicode:
-    git:
-      url: https://github.com/kelegorm/unicode_null_safety
-      ref: master
+  unicode: ^0.3.0
 dev_dependencies:
   test: ^1.16.5

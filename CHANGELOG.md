@@ -1,6 +1,6 @@
 ## 0.2.0
 
- - Converted to full Null-Safety
+ - The source code has been migrated to null safety. Thanks to the author of this work, Dewey Gaedcke (https://github.com/dgaedcke).
 
 ## 0.1.4
 
