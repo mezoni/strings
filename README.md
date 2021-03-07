@@ -1,7 +1,7 @@
 strings
 =======
 
-Version: 0.1.2
+Version: 0.2.0
 
 The 'strings' is a helper for the string transformations which can be useful in the code generators (such as 'camelize', 'escape', 'underscore' etc).
 

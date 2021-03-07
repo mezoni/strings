@@ -148,8 +148,8 @@ void testIsUpperCase() {
 void testJoin() {
   var subject = 'join';
   //
-  var actual = join(null);
-  expect(actual, null, reason: subject);
+  var actual = join([]);
+  expect(actual, '', reason: subject);
   //
   actual = join([1, 2]);
   expect(actual, '12', reason: subject);

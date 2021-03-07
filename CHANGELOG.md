@@ -1,3 +1,7 @@
+## 0.2.0
+
+ - Converted to full Null-Safety
+
 ## 0.1.4
 
 - The code is more adapted to support grapheme clusters
