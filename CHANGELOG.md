@@ -1,3 +1,7 @@
+## 0.2.1
+
+ - Removed unnecessary null argument checks
+
 ## 0.2.0
 
  - The source code has been migrated to null safety. Thanks to the author of this work, Dewey Gaedcke (https://github.com/dgaedcke).

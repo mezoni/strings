@@ -159,10 +159,6 @@ final List<int> _ascii = <int>[
 ///      print(camelize("dart_vm"));
 ///      => DartVm
 String camelize(String string, [bool lower = false]) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return string;
   }
@@ -225,10 +221,6 @@ String camelize(String string, [bool lower = false]) {
 ///     print(capitalize("dart"));
 ///     => Dart
 String capitalize(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return string;
   }
@@ -242,10 +234,6 @@ String capitalize(String string) {
 ///     print(escape("Hello 'world' \n"));
 ///     => Hello \'world\' \n
 String escape(String string, [String Function(int charCode)? encode]) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return string;
   }
@@ -315,10 +303,6 @@ String escape(String string, [String Function(int charCode)? encode]) {
 ///     print(isLowerCase(""));
 ///     => false
 bool isLowerCase(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return true;
   }
@@ -361,10 +345,6 @@ bool isLowerCase(String string) {
 ///     print(isUpperCase(""));
 ///     => false
 bool isUpperCase(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return true;
   }
@@ -417,10 +397,6 @@ String join(List list, [String separator = '']) {
 ///     print(reverse("hello"));
 ///     => olleh
 String reverse(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.length < 2) {
     return string;
   }
@@ -439,10 +415,6 @@ String reverse(String string) {
 ///     print(startsWithLowerCase(""));
 ///     => false
 bool startsWithLowerCase(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return false;
   }
@@ -481,10 +453,6 @@ bool startsWithLowerCase(String string) {
 ///     print(startsWithUpperCase(""));
 ///     => false
 bool startsWithUpperCase(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return false;
   }
@@ -519,10 +487,6 @@ bool startsWithUpperCase(String string) {
 ///     print(toPrintable("Hello 'world' \n"));
 ///     => Hello 'world' \n
 String toPrintable(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return string;
   }
@@ -567,10 +531,6 @@ String toPrintable(String string) {
 ///     print(toUnicode(48));
 ///     => \u0030
 String toUnicode(int charCode) {
-  if (charCode == null) {
-    throw ArgumentError.notNull('charCode');
-  }
-
   if (charCode < 0 || charCode > _UNICODE_END) {
     throw RangeError.range(charCode, 0, _UNICODE_END, 'charCode');
   }
@@ -590,10 +550,6 @@ String toUnicode(int charCode) {
 ///     print(underscore("DartVM DartCore"));
 ///     => dart_vm dart_core
 String underscore(String string) {
-  if (string == null) {
-    throw ArgumentError.notNull('string');
-  }
-
   if (string.isEmpty) {
     return string;
   }
